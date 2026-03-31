@@ -118,17 +118,9 @@ async def send_reminder(context: ContextTypes.DEFAULT_TYPE):
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "👋 Привет! Я бот-напоминалка.\n\n"
-        "📝 *Как добавить напоминание:*\n"
-        "Просто напиши мне, например:\n"
-        "• `в 14:00 пойти к врачу`\n"
-        "• `через 30 минут выпить воду`\n"
-        "• `завтра в 9:00 встреча с клиентом`\n"
-        "• `18:30 забрать детей`\n\n"
         "📋 *Команды:*\n"
         "/list — посмотреть все напоминания\n"
-        "/clear — удалить все напоминания\n"
-        "/help — помощь",
+        "/clear — удалить все напоминания",
         parse_mode="Markdown",
     )
 
@@ -209,14 +201,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     dt, reminder_text = parse_reminder(text)
 
     if dt is None:
-        await update.message.reply_text(
-            "🤔 Не понял формат. Попробуй:\n"
-            "• `в 14:00 пойти к врачу`\n"
-            "• `через 30 минут позвонить маме`\n"
-            "• `завтра в 10:00 встреча`\n\n"
-            "Напиши /help для подробностей.",
-            parse_mode="Markdown",
-        )
+        await update.message.reply_text("🤔 Не понял. Пример: `в 14:00 пойти к врачу`", parse_mode="Markdown")
         return
 
     # Генерируем уникальный ID
